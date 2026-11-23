@@ -10,12 +10,14 @@ import PlaylistModal from "@/components/PlaylistModal";
 import AddToPlaylistModal from "@/components/AddToPlaylistModal";
 import PlayerBar from "@/components/PlayerBar";
 import MobileNav from "@/components/MobileNav";
+import RegisterSW from "@/components/RegisterSW";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Vibexa | Stream Your Vibe",
   description: "Full-stack music streaming app built with Next.js & Supabase",
+  manifest: "/manifest.json",
 };
 
 export default function RootLayout({
@@ -26,6 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className={`${inter.className} bg-black text-white h-screen overflow-hidden flex flex-col`}>
+        <RegisterSW />
         <AuthProvider>
           <AuthModal />
           <UploadModal />
