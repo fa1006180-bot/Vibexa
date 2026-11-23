@@ -5,6 +5,7 @@ import { Search as SearchIcon } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { Song } from "@/types";
 import SongGrid from "@/components/SongGrid";
+import AdBanner from "@/components/AdBanner";
 
 export default function SearchPage() {
   const [query, setQuery] = useState("");
@@ -17,7 +18,6 @@ export default function SearchPage() {
       setLoading(true);
       const q = query.trim();
 
-      // ১. Supabase থেকে আপলোড করা গান খোঁজা
       let supaReq = supabase
         .from("songs")
         .select("*")
@@ -57,14 +57,22 @@ export default function SearchPage() {
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search Music..."
+          placeholder="Search music..."
           className="w-full rounded-full bg-neutral-800 border border-neutral-700 pl-10 pr-4 py-2.5 text-sm text-white placeholder:text-neutral-400 focus:outline-none focus:border-violet-500"
         />
       </div>
 
+      {/* Adsterra 320x50 Banner Ad */}
+      <AdBanner
+        adKey="8a5f17794df67c3b035952237c594970"
+        scriptSrc="https://bauval.org/22/8a5f17794df67c3b035952237c594970"
+        width={320}
+        height={50}
+      />
+
       <div>
         <h2 className="text-xl font-bold text-white mb-4">
-          {query.trim() ? `"${query}"-The Resuit"` : "Browse Popular Songs"}
+          {query.trim() ? `"${query}"-The Resuit` : "Browse Popular Songs"}
         </h2>
         {loading ? (
           <p className="text-sm text-neutral-400">Searching...</p>

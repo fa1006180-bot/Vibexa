@@ -3,6 +3,7 @@ import { fetchYouTubeSongs } from "@/lib/youtube";
 import { fetchITunesSongs } from "@/lib/itunes";
 import { fetchLiveRadioStations } from "@/lib/radio";
 import SongGrid from "@/components/SongGrid";
+import AdBanner from "@/components/AdBanner";
 import { Song } from "@/types";
 
 export const dynamic = "force-dynamic";
@@ -35,7 +36,7 @@ export default async function Home() {
           Discover Your Vibe on Vibexa 🎧
         </h1>
         <p className="text-sm text-neutral-300 mt-1">
-         Enjoy Bengali, Hindi & English songs.
+         Enjoy Bengali,Hindi & English
         </p>
       </div>
 
@@ -50,6 +51,14 @@ export default async function Home() {
         <h2 className="text-xl font-bold text-white mb-4">Bollywood Full Hits</h2>
         <SongGrid songs={fallbackBollywood} />
       </div>
+
+      {/* Adsterra 320x50 Banner Ad */}
+      <AdBanner
+        adKey="8a5f17794df67c3b035952237c594970"
+        scriptSrc="https://bauval.org/22/8a5f17794df67c3b035952237c594970"
+        width={320}
+        height={50}
+      />
 
       {ytBengali.length > 0 && (
         <div>
