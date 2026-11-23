@@ -27,7 +27,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
-      <body className={`${inter.className} bg-black text-white h-screen overflow-hidden flex flex-col`}>
+      <body className={`${inter.className} bg-black text-white h-dvh overflow-hidden flex flex-col`}>
         <RegisterSW />
         <AuthProvider>
           <AuthModal />
@@ -35,7 +35,7 @@ export default function RootLayout({
           <PlaylistModal />
           <AddToPlaylistModal />
 
-          <div className="flex flex-1 overflow-hidden">
+          <div className="flex flex-1 min-h-0 overflow-hidden">
             <Sidebar />
             <main className="flex-1 my-2 mr-2 ml-2 md:ml-0 rounded-lg bg-neutral-900 overflow-y-auto relative">
               <Header />

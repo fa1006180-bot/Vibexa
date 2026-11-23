@@ -12,7 +12,7 @@ export default function MobileNav() {
   const { user } = useAuth();
 
   return (
-    <nav className="md:hidden flex items-center justify-around bg-neutral-950 border-t border-neutral-800 py-2.5 px-2">
+    <nav className="md:hidden shrink-0 z-50 flex items-center justify-around bg-neutral-950 border-t border-neutral-800 pt-2.5 pb-4 px-2"> 
       <Link
         href="/"
         className={`flex flex-col items-center gap-1 text-[11px] ${

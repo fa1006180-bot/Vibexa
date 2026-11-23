@@ -234,7 +234,7 @@ export default function PlayerBar() {
   };
 
   return (
-    <div className="w-full bg-black border-t border-neutral-800/80 px-4 py-3 flex items-center justify-between gap-4 z-40">
+   <div className="w-full shrink-0 bg-black border-t border-neutral-800/80 px-4 py-3 flex items-center justify-between gap-4 z-40">
       <audio
         ref={audioRef}
         src={songUrl || undefined}
