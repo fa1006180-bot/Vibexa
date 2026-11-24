@@ -11,7 +11,7 @@ import AddToPlaylistModal from "@/components/AddToPlaylistModal";
 import PlayerBar from "@/components/PlayerBar";
 import MobileNav from "@/components/MobileNav";
 import RegisterSW from "@/components/RegisterSW";
-
+import SplashAd from "@/components/SplashAd";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -31,6 +31,7 @@ export default function RootLayout({
         className={`${inter.className} bg-black text-white min-h-screen md:h-screen md:overflow-hidden flex flex-col`}
       >
         <RegisterSW />
+        <SplashAd />
         <AuthProvider>
           <AuthModal />
           <UploadModal />

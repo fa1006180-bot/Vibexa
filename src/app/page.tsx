@@ -57,16 +57,11 @@ export default async function Home() {
       </div>
 
       {/* Adsterra 320x50 Banner Ad */}
-      <AdBanner
-        adKey="8a5f17794df67c3b035952237c594970"
-        scriptSrc="https://bauval.org/22/8a5f17794df67c3b035952237c594970"
-        width={320}
-        height={50}
-      />
+      
 
       {ytBengali.length > 0 && (
         <div>
-          <h2 className="text-xl font-bold text-white mb-4">Bengali Full Hits</h2>
+<h2 className="text-xl font-bold text-white mb-4">Bengali Full Hits</h2>
           <SongGrid songs={ytBengali} />
         </div>
       )}
