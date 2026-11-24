@@ -68,14 +68,14 @@ export default function PlaylistModal() {
             <ListMusic className="text-white" size={20} />
           </div>
           <div>
-            <h2 className="text-lg font-bold text-white">নতুন প্লেলিস্ট তৈরি করুন</h2>
-            <p className="text-xs text-neutral-400">আপনার পছন্দের গানের কালেকশন সাজান</p>
+            <h2 className="text-lg font-bold text-white">Create a new playlist</h2>
+            <p className="text-xs text-neutral-400">Organize your favorite songs into a collection</p>
           </div>
         </div>
 
         <form onSubmit={handleCreate} className="space-y-4">
           <div>
-            <label className="text-xs text-neutral-300">প্লেলিস্টের নাম (Name)</label>
+            <label className="text-xs text-neutral-300">Playlist (Name)</label>
             <input
               type="text"
               required
@@ -87,12 +87,12 @@ export default function PlaylistModal() {
           </div>
 
           <div>
-            <label className="text-xs text-neutral-300">বিবরণ (Optional)</label>
+            <label className="text-xs text-neutral-300">Description (Optional)</label>
             <textarea
               rows={2}
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              placeholder="এই প্লেলিস্ট সম্পর্কে কিছু লিখুন..."
+              placeholder="Write something about this playlist..."
               className="mt-1 w-full rounded-md bg-neutral-800 border border-neutral-700 px-3 py-2 text-sm text-white focus:outline-none focus:border-violet-500"
             />
           </div>
@@ -104,7 +104,7 @@ export default function PlaylistModal() {
             disabled={loading}
             className="w-full rounded-full bg-gradient-to-r from-violet-600 to-cyan-500 py-2.5 font-semibold text-white hover:opacity-90 transition disabled:opacity-50"
           >
-            {loading ? "তৈরি হচ্ছে..." : "Create Playlist"}
+            {loading ? "Creating..." : "Create Playlist"}
           </button>
         </form>
       </div>

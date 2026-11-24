@@ -12,11 +12,11 @@ export default function MobileNav() {
   const { user } = useAuth();
 
   return (
-    <nav className="md:hidden shrink-0 z-50 flex items-center justify-around bg-neutral-950 border-t border-neutral-800 pt-2.5 pb-4 px-2"> 
+    <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 h-16 flex items-center justify-around bg-neutral-950/95 backdrop-blur-md border-t border-neutral-800 px-2">
       <Link
         href="/"
         className={`flex flex-col items-center gap-1 text-[11px] ${
-          pathname === "/" ? "text-violet-400" : "text-neutral-400"
+          pathname === "/" ? "text-violet-400 font-semibold" : "text-neutral-300"
         }`}
       >
         <Home size={20} />
@@ -25,7 +25,7 @@ export default function MobileNav() {
       <Link
         href="/search"
         className={`flex flex-col items-center gap-1 text-[11px] ${
-          pathname === "/search" ? "text-violet-400" : "text-neutral-400"
+          pathname === "/search" ? "text-violet-400 font-semibold" : "text-neutral-300"
         }`}
       >
         <Search size={20} />
@@ -34,7 +34,7 @@ export default function MobileNav() {
       <Link
         href="/liked"
         className={`flex flex-col items-center gap-1 text-[11px] ${
-          pathname === "/liked" ? "text-violet-400" : "text-neutral-400"
+          pathname === "/liked" ? "text-violet-400 font-semibold" : "text-neutral-300"
         }`}
       >
         <Heart size={20} />
@@ -42,7 +42,7 @@ export default function MobileNav() {
       </Link>
       <button
         onClick={() => (user ? openPlaylist() : openAuth())}
-        className="flex flex-col items-center gap-1 text-[11px] text-neutral-400"
+        className="flex flex-col items-center gap-1 text-[11px] text-neutral-300"
       >
         <PlusSquare size={20} />
         Playlist

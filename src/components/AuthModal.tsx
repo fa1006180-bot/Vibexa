@@ -29,7 +29,7 @@ export default function AuthModal() {
       if (error) {
         setError(error.message);
       } else {
-        setMessage("অ্যাকাউন্ট তৈরি হয়েছে! লগ-ইন করে নিন বা ইমেইল চেক করুন।");
+        setMessage("Account created successfully! Please log in or check your email.");
       }
     } else {
       const { error } = await supabase.auth.signInWithPassword({ email, password });
@@ -57,16 +57,16 @@ export default function AuthModal() {
             <Disc3 className="text-white animate-spin-slow" size={26} />
           </div>
           <h2 className="text-2xl font-bold text-white">
-            {isSignUp ? "Vibexa-তে অ্যাকাউন্ট খুলুন" : "Vibexa-তে স্বাগতম"}
+            {isSignUp ? "Create an account on vibexa" : "Welcome to Vibexa"}
           </h2>
           <p className="text-sm text-neutral-400 mt-1">
-            {isSignUp ? "আপনার পছন্দের গান শুনতে জয়েন করুন" : "চালিয়ে যেতে লগ-ইন করুন"}
+            {isSignUp ? "Join to listen to your favorite songs" : "Log in to continue"}
           </p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="text-xs font-medium text-neutral-300">ইমেইল (Email)</label>
+            <label className="text-xs font-medium text-neutral-300">Email</label>
             <input
               type="email"
               required
@@ -78,7 +78,7 @@ export default function AuthModal() {
           </div>
 
           <div>
-            <label className="text-xs font-medium text-neutral-300">পাসওয়ার্ড (Password)</label>
+            <label className="text-xs font-medium text-neutral-300"> Password</label>
             <input
               type="password"
               required
@@ -98,12 +98,12 @@ export default function AuthModal() {
             disabled={loading}
             className="w-full rounded-full bg-gradient-to-r from-violet-600 to-cyan-500 py-2.5 font-semibold text-white hover:opacity-90 transition disabled:opacity-50"
           >
-            {loading ? "অপেক্ষা করুন..." : isSignUp ? "Sign Up" : "Log In"}
+            {loading ? "Please wait..." : isSignUp ? "Sign Up" : "Log In"}
           </button>
         </form>
 
         <div className="mt-5 text-center text-sm text-neutral-400">
-          {isSignUp ? "আগে থেকেই অ্যাকাউন্ট আছে?" : "নতুন ইউজার?"}{" "}
+          {isSignUp ? "Already have an account?" : "New user?"}{" "}
           <button
             type="button"
             onClick={() => {
@@ -113,7 +113,7 @@ export default function AuthModal() {
             }}
             className="text-violet-400 hover:underline font-medium"
           >
-            {isSignUp ? "Log in করুন" : "Sign up করুন"}
+            {isSignUp ? "Log in " : "Sign up"}
           </button>
         </div>
       </div>

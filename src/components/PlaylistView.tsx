@@ -32,7 +32,7 @@ export default function PlaylistView({ playlist, initialSongs }: PlaylistViewPro
   };
 
   const handleDeletePlaylist = async () => {
-    if (!confirm(`"${playlist.name}" প্লেলিস্টটি কি ডিলিট করতে চান?`)) return;
+    if (!confirm(`"${playlist.name}" Do you want to delete this playlist?`)) return;
     await supabase.from("playlists").delete().eq("id", playlist.id);
     triggerPlaylistRefresh();
     router.push("/");
@@ -53,7 +53,7 @@ export default function PlaylistView({ playlist, initialSongs }: PlaylistViewPro
             {playlist.description && (
               <p className="text-sm text-neutral-300">{playlist.description}</p>
             )}
-            <p className="text-xs text-neutral-400">{songs.length} টি গান</p>
+            <p className="text-xs text-neutral-400">{songs.length} Songs</p>
           </div>
         </div>
 
@@ -76,7 +76,7 @@ export default function PlaylistView({ playlist, initialSongs }: PlaylistViewPro
 
       {songs.length === 0 ? (
         <p className="text-sm text-neutral-400 py-8">
-          এই প্লেলিস্টে এখনো কোনো গান নেই। হোম বা সার্চ পেজ থেকে যেকোনো গানের &quot;+&quot; আইকনে ক্লিক করে গান যোগ করুন!
+          There are no songs in this playlist yet. Click the "+" icon on any song from the Home or Search page to add it!
         </p>
       ) : (
         <div className="space-y-1">
