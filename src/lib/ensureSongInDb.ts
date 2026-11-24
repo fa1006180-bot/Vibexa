@@ -8,17 +8,22 @@ export async function ensureSongInDb(song: Song, userId: string): Promise<string
 
   const supabase = createClient();
 
-  const { data: existing } = await supabase
+  const { data: existing, error: findError } = await supabase
     .from("songs")
     .select("id")
     .eq("song_path", song.song_path)
     .maybeSingle();
 
+  if (findError) {
+    alert("Check error: " + findError.message);
+    return null;
+  }
+
   if (existing?.id) {
     return existing.id;
   }
 
-  const { data: inserted, error } = await supabase
+  const { data: inserted, error: insertError } = await supabase
     .from("songs")
     .insert({
       user_id: userId,
@@ -32,6 +37,10 @@ export async function ensureSongInDb(song: Song, userId: string): Promise<string
     .select("id")
     .single();
 
-  if (error || !inserted) return null;
+  if (insertError || !inserted) {
+    alert("Save error: " + (insertError?.message || "Unknown error"));
+    return null;
+  }
+
   return inserted.id;
 }
