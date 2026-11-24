@@ -37,6 +37,7 @@ export default function AdBanner({
 
     const invokeScript = document.createElement("script");
     invokeScript.type = "text/javascript";
+    invokeScript.setAttribute("data-cfasync", "false");
     invokeScript.src = scriptSrc.startsWith("//") ? `https:${scriptSrc}` : scriptSrc;
     invokeScript.async = true;
 
@@ -48,7 +49,6 @@ export default function AdBanner({
     };
   }, [adKey, scriptSrc, width, height]);
 
-  // যতক্ষণ না আসল Ad Key বসাচ্ছেন, ততক্ষণ জায়গাটি প্রিভিউ হিসেবে দেখাবে
   if (!adKey || adKey === "YOUR_ADSTERRA_KEY" || !scriptSrc) {
     return (
       <div className="w-full flex flex-col items-center justify-center rounded-xl border border-dashed border-neutral-700 bg-neutral-900/60 py-4 px-3 my-4 text-center">
@@ -56,21 +56,21 @@ export default function AdBanner({
           Sponsored
         </span>
         <p className="text-xs text-neutral-400">
-          Ad Space ({width}×{height}) — এখানে আপনার বিজ্ঞাপন দেখাবে
+          Ad Space ({width}×{height}) 
         </p>
       </div>
     );
   }
 
   return (
-    <div className="w-full flex flex-col items-center justify-center rounded-xl bg-neutral-950/60 border border-neutral-800/70 py-3 px-2 my-4 overflow-hidden">
-      <span className="text-[10px] uppercase tracking-wider text-neutral-500 mb-1.5">
+    <div className="w-full flex flex-col items-center justify-center rounded-2xl bg-neutral-900/90 border border-neutral-800 py-4 px-3 my-4 shadow-2xl overflow-hidden">
+      <span className="text-[10px] uppercase tracking-widest text-neutral-500 mb-2">
         Advertisement
       </span>
       <div
         ref={adContainerRef}
-        style={{ minWidth: width, minHeight: height }}
-        className="flex items-center justify-center max-w-full overflow-x-auto"
+        style={{ width, height }}
+        className="flex items-center justify-center max-w-full overflow-hidden rounded-lg"
       />
     </div>
   );
