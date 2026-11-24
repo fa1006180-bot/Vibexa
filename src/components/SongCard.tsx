@@ -2,7 +2,7 @@
 
 import { Play, Pause, ListPlus } from "lucide-react";
 import { Song } from "@/types";
-import { getMediaUrl } from "@/lib/utils";
+import { getMediaUrl, isYouTubeSong } from "@/lib/utils";
 import { usePlayerStore } from "@/store/usePlayerStore";
 import { useModalStore } from "@/store/useModalStore";
 import { useAuth } from "./AuthProvider";
@@ -21,7 +21,7 @@ export default function SongCard({ song, onPlay }: SongCardProps) {
   const isCurrentSong = activeSong?.id === song.id;
   const imageUrl = getMediaUrl("images", song.image_path);
   const isLive = song.id.startsWith("radio-");
-  const isFullYT = song.id.startsWith("yt-");
+  const isFullYT = isYouTubeSong(song);
 
   const handleClick = () => {
     if (isCurrentSong) {
@@ -34,7 +34,7 @@ export default function SongCard({ song, onPlay }: SongCardProps) {
   const handleAddPlaylist = (e: React.MouseEvent) => {
     e.stopPropagation();
     if (!user) return openAuth();
-    openAddToPlaylist(song.id);
+    openAddToPlaylist(song);
   };
 
   return (
@@ -52,6 +52,18 @@ export default function SongCard({ song, onPlay }: SongCardProps) {
           }}
           className="h-full w-full object-cover group-hover:scale-105 transition duration-300"
         />
+
+        {song.isExternal && (
+          <span
+            className={`absolute top-2 left-2 text-[10px] px-1.5 py-0.5 rounded font-semibold backdrop-blur-sm ${
+              isFullYT || isLive
+                ? "bg-emerald-500/80 text-white"
+                : "bg-black/70 text-neutral-200"
+            }`}
+          >
+            {isLive ? "LIVE" : isFullYT ? "FULL" : "30s"}
+          </span>
+        )}
 
         <button
           type="button"
@@ -81,28 +93,16 @@ export default function SongCard({ song, onPlay }: SongCardProps) {
           <p className="text-xs text-neutral-400 truncate mt-0.5">{song.author}</p>
         </div>
 
-        {song.isExternal ? (
-          <span
-            className={`text-[10px] px-1.5 py-0.5 rounded shrink-0 font-semibold ${
-              isFullYT || isLive
-                ? "bg-emerald-500/20 text-emerald-300"
-                : "bg-neutral-700/70 text-neutral-300"
-            }`}
+        <div className="flex items-center gap-2 pt-0.5 shrink-0">
+          <button
+            onClick={handleAddPlaylist}
+            title="Add to Playlist"
+            className="text-neutral-400 hover:text-white transition"
           >
-            {isLive ? "LIVE" : isFullYT ? "FULL" : "30s"}
-          </span>
-        ) : (
-          <div className="flex items-center gap-2 pt-0.5 shrink-0">
-            <button
-              onClick={handleAddPlaylist}
-              title="Add to Playlist"
-              className="text-neutral-400 hover:text-white transition"
-            >
-              <ListPlus size={17} />
-            </button>
-            <LikeButton songId={song.id} />
-          </div>
-        )}
+            <ListPlus size={17} />
+          </button>
+          <LikeButton song={song} />
+        </div>
       </div>
     </div>
   );

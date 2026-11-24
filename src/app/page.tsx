@@ -18,7 +18,11 @@ export default async function Home() {
     ytGlobal,
     indianNonStop,
   ] = await Promise.all([
-    supabase.from("songs").select("*").order("created_at", { ascending: false }),
+    supabase
+  .from("songs")
+  .select("*")
+  .or("is_external.is.null,is_external.eq.false")
+  .order("created_at", { ascending: false }),
     fetchYouTubeSongs("Arijit Singh Bollywood Hits", 10),
     fetchYouTubeSongs("Best Bengali Songs Anupam Roy", 10),
     fetchYouTubeSongs("Top Global Pop Hits", 10),

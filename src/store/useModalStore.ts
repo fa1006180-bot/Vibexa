@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { Song } from "@/types";
 
 interface ModalStore {
   isAuthOpen: boolean;
@@ -13,8 +14,8 @@ interface ModalStore {
   openPlaylist: () => void;
   closePlaylist: () => void;
 
-  addToPlaylistSongId: string | null;
-  openAddToPlaylist: (songId: string) => void;
+  addToPlaylistSong: Song | null;
+  openAddToPlaylist: (song: Song) => void;
   closeAddToPlaylist: () => void;
 
   playlistRefreshKey: number;
@@ -34,9 +35,9 @@ export const useModalStore = create<ModalStore>((set) => ({
   openPlaylist: () => set({ isPlaylistOpen: true }),
   closePlaylist: () => set({ isPlaylistOpen: false }),
 
-  addToPlaylistSongId: null,
-  openAddToPlaylist: (songId) => set({ addToPlaylistSongId: songId }),
-  closeAddToPlaylist: () => set({ addToPlaylistSongId: null }),
+  addToPlaylistSong: null,
+  openAddToPlaylist: (song) => set({ addToPlaylistSong: song }),
+  closeAddToPlaylist: () => set({ addToPlaylistSong: null }),
 
   playlistRefreshKey: 0,
   triggerPlaylistRefresh: () =>

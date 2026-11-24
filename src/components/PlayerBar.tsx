@@ -10,9 +10,12 @@ import {
   Repeat,
   Volume2,
   VolumeX,
+  ListPlus,
 } from "lucide-react";
 import { usePlayerStore } from "@/store/usePlayerStore";
-import { formatTime, getMediaUrl } from "@/lib/utils";
+import { useModalStore } from "@/store/useModalStore";
+import { useAuth } from "./AuthProvider";
+import { formatTime, getMediaUrl, isYouTubeSong } from "@/lib/utils";
 import LikeButton from "./LikeButton";
 
 interface YTPlayer {
@@ -63,6 +66,9 @@ export default function PlayerBar() {
     toggleRepeat,
   } = usePlayerStore();
 
+  const { openAddToPlaylist, openAuth } = useModalStore();
+  const { user } = useAuth();
+
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const ytWrapperRef = useRef<HTMLDivElement | null>(null);
   const ytPlayerRef = useRef<YTPlayer | null>(null);
@@ -72,7 +78,7 @@ export default function PlayerBar() {
   const [duration, setDuration] = useState(0);
   const [prevVolume, setPrevVolume] = useState(0.8);
 
-  const isYouTube = activeSong?.id.startsWith("yt-") ?? false;
+  const isYouTube = isYouTubeSong(activeSong);
   const songUrl = activeSong && !isYouTube ? getMediaUrl("songs", activeSong.song_path) : "";
   const imageUrl = activeSong ? getMediaUrl("images", activeSong.image_path) : "";
 
@@ -142,7 +148,6 @@ export default function PlayerBar() {
           },
           onStateChange: (event) => {
             if (event.data === 0) {
-              // গান শেষ হলে
               const state = usePlayerStore.getState();
               if (state.repeat) {
                 ytPlayerRef.current?.seekTo(0, true);
@@ -234,7 +239,7 @@ export default function PlayerBar() {
   };
 
   return (
-   <div className="w-full shrink-0 bg-black border-t border-neutral-800/80 px-4 py-3 flex items-center justify-between gap-4 z-40">
+    <div className="w-full shrink-0 bg-black border-t border-neutral-800/80 px-4 py-3 flex items-center justify-between gap-4 z-40">
       <audio
         ref={audioRef}
         src={songUrl || undefined}
@@ -243,7 +248,7 @@ export default function PlayerBar() {
         onEnded={handleEnded}
       />
 
-      {/* বাম অংশ: গানের তথ্য বা মিনি ভিডিও */}
+      {/* বাম অংশ: গানের তথ্য, মিনি ভিডিও, Playlist ও Like বাটন */}
       <div className="flex items-center gap-3 w-[30%] min-w-[140px]">
         {isYouTube ? (
           <div
@@ -267,11 +272,16 @@ export default function PlayerBar() {
           <p className="text-xs text-neutral-400 truncate">{activeSong.author}</p>
         </div>
 
-        {!activeSong.isExternal && (
-          <div className="hidden sm:block ml-2">
-            <LikeButton songId={activeSong.id} />
-          </div>
-        )}
+        <div className="hidden sm:flex items-center gap-2.5 ml-2 shrink-0">
+          <button
+            onClick={() => (user ? openAddToPlaylist(activeSong) : openAuth())}
+            title="Add to Playlist"
+            className="text-neutral-400 hover:text-white transition"
+          >
+            <ListPlus size={18} />
+          </button>
+          <LikeButton song={activeSong} />
+        </div>
       </div>
 
       {/* মাঝের অংশ: প্লেয়ার কন্ট্রোল ও Seekbar */}

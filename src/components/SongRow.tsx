@@ -65,7 +65,7 @@ export default function SongRow({ song, index, onPlay, onRemove }: SongRowProps)
           onClick={(e) => {
             e.stopPropagation();
             if (!user) return openAuth();
-            openAddToPlaylist(song.id);
+            openAddToPlaylist(song);
           }}
           title="Add to Playlist"
           className="text-neutral-400 hover:text-white transition"
@@ -73,7 +73,7 @@ export default function SongRow({ song, index, onPlay, onRemove }: SongRowProps)
           <ListPlus size={17} />
         </button>
 
-        <LikeButton songId={song.id} />
+        <LikeButton song={song} />
 
         {onRemove && (
           <button
