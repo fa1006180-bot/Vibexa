@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/components/AuthProvider";
@@ -21,15 +21,20 @@ export const metadata: Metadata = {
   manifest: "/manifest.json",
 };
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className="dark overflow-x-hidden">
       <body
-        className={`${inter.className} bg-black text-white min-h-dvh md:h-screen md:overflow-hidden flex flex-col`}
+        className={`${inter.className} bg-neutral-900 md:bg-black text-white min-h-dvh md:h-screen overflow-x-hidden md:overflow-hidden flex flex-col`}
       >
         <RegisterSW />
         <SplashAd />
@@ -39,9 +44,9 @@ export default function RootLayout({
           <PlaylistModal />
           <AddToPlaylistModal />
 
-          <div className="flex flex-1 min-h-0 bg-black md:overflow-hidden">
+          <div className="flex flex-1 min-h-0 min-w-0 bg-neutral-900 md:bg-black md:overflow-hidden">
             <Sidebar />
-            <main className="flex-1 min-h-dvh md:min-h-0 md:my-2 md:mr-2 bg-neutral-900 md:rounded-lg md:overflow-y-auto relative">
+            <main className="flex-1 w-full min-w-0 md:my-2 md:mr-2 bg-neutral-900 md:rounded-lg overflow-x-hidden md:overflow-y-auto relative">
               <Header />
               <div className="px-4 sm:px-6 pb-40 md:pb-24">{children}</div>
             </main>
