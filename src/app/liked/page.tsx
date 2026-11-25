@@ -47,7 +47,9 @@ export default function LikedSongsPage() {
     return (
       <div className="flex flex-col items-center justify-center py-24 text-center space-y-4">
         <Heart size={48} className="text-violet-500" />
-        <h2 className="text-xl font-bold text-white">Log in to view your favorite songs.</h2>
+        <h2 className="text-xl font-bold text-white">
+          Log in to view your Liked Songs
+        </h2>
         <button
           onClick={openAuth}
           className="rounded-full bg-white px-6 py-2.5 text-sm font-bold text-black hover:scale-105 transition"
@@ -69,8 +71,12 @@ export default function LikedSongsPage() {
           <p className="text-xs font-semibold uppercase tracking-wider text-neutral-200">
             Playlist
           </p>
-          <h1 className="text-3xl sm:text-5xl font-extrabold text-white">Liked Songs</h1>
-          <p className="text-sm text-neutral-300">{songs.length} Songs</p>
+          <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
+            Liked Songs
+          </h1>
+          <p className="text-sm text-neutral-300">
+            {songs.length} {songs.length === 1 ? "Song" : "Songs"}
+          </p>
         </div>
       </div>
 
@@ -84,10 +90,10 @@ export default function LikedSongsPage() {
       )}
 
       {fetching ? (
-        <p className="text-sm text-neutral-400">Loading...</p>
+        <p className="text-sm text-neutral-400">Loading your liked songs...</p>
       ) : songs.length === 0 ? (
         <p className="text-sm text-neutral-400 py-8">
-          You haven’t liked any songs yet. Click the heart icon next to a song!
+          No liked songs yet. Tap the heart icon on any song to save it here!
         </p>
       ) : (
         <div className="space-y-1">
